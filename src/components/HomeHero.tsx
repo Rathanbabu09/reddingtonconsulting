@@ -98,7 +98,7 @@ export function HomeHero() {
                   <div
                     key={o.label}
                     className="absolute top-1/2 left-1/2"
-                    style={{ transform: `translate(${Math.cos(a) * R}px, ${Math.sin(a) * R}px)` }}
+                    style={{ transform: `translate(${Math.round(Math.cos(a) * R)}px, ${Math.round(Math.sin(a) * R)}px)` }}
                   >
                     <div className="-translate-x-1/2 -translate-y-1/2">
                       <div className="flex animate-[spin_60s_linear_infinite_reverse] items-center gap-2 rounded-full border border-line bg-white py-2 pr-4 pl-2 shadow-[0_14px_34px_-18px_rgba(12,20,39,0.45)]">

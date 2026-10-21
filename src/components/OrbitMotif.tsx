@@ -7,7 +7,9 @@ import { motion } from "motion/react";
 const C = 100;
 const R = 95;
 const rad = (deg: number) => (deg * Math.PI) / 180;
-const pt = (deg: number, r: number) => [C + Math.cos(rad(deg)) * r, C + Math.sin(rad(deg)) * r] as const;
+// Rounded so the server-rendered and client-rendered attributes match exactly.
+const round = (n: number) => Math.round(n * 100) / 100;
+const pt = (deg: number, r: number) => [round(C + Math.cos(rad(deg)) * r), round(C + Math.sin(rad(deg)) * r)] as const;
 
 // Swoosh: tapered band from thin (upper-left) to thick (right), like the logo's red arc.
 function swooshPath(from: number, to: number, maxW: number) {
@@ -20,8 +22,8 @@ function swooshPath(from: number, to: number, maxW: number) {
     const w = maxW * Math.pow(t, 1.6);
     const [ox, oy] = pt(a, R + w / 2);
     const [ix, iy] = pt(a, R - w / 2);
-    outer.push(`${ox.toFixed(2)} ${oy.toFixed(2)}`);
-    inner.unshift(`${ix.toFixed(2)} ${iy.toFixed(2)}`);
+    outer.push(`${ox} ${oy}`);
+    inner.unshift(`${ix} ${iy}`);
   }
   return `M${outer.join(" L")} L${inner.join(" L")} Z`;
 }
@@ -32,7 +34,7 @@ const dots = Array.from({ length: DOTS }, (_, i) => {
   const t = i / (DOTS - 1);
   const a = 55 + t * 135; // degrees, clockwise from 3 o'clock
   const [x, y] = pt(a, R);
-  return { x, y, rx: 0.9 + t * 3.6, ry: 0.7 + t * 2.7, rot: a + 90 };
+  return { x, y, rx: round(0.9 + t * 3.6), ry: round(0.7 + t * 2.7), rot: round(a + 90) };
 });
 
 export function OrbitMotif({ className = "" }: { className?: string }) {
