@@ -2,13 +2,11 @@ import Link from "next/link";
 import { CtaBand } from "@/components/CtaBand";
 import { HomeHero } from "@/components/HomeHero";
 import { Icon } from "@/components/Icon";
-import { JobCard } from "@/components/JobCard";
 import { ClientMarquee } from "@/components/ClientLogos";
 import { PostCard } from "@/components/PostCard";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
-import { jobs } from "@/content/jobs";
 import { posts } from "@/content/posts";
 import { industries, process, services } from "@/content/services";
 
@@ -136,27 +134,6 @@ export default function Home() {
                   <h3 className="font-display text-lg font-semibold text-ink">{ind.title}</h3>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted">{ind.body}</p>
                 </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
-      </section>
-
-      {/* Latest jobs */}
-      <section className="bg-surface py-24">
-        <div className="mx-auto max-w-5xl px-5 sm:px-8">
-          <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-            <SectionHeading eyebrow="Now hiring" title="Latest opportunities" />
-            <Reveal>
-              <Link href="/careers" className="group inline-flex items-center gap-2 font-semibold text-ink hover:text-brand">
-                View all jobs <Icon name="arrow" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Reveal>
-          </div>
-          <Stagger className="mt-12 space-y-4">
-            {jobs.slice(0, 3).map((j) => (
-              <StaggerItem key={j.slug}>
-                <JobCard job={j} />
               </StaggerItem>
             ))}
           </Stagger>
